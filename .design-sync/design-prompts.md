@@ -29,7 +29,7 @@ Redesign the features page. Today: hero, then 4 alternating copy/illustration ro
 
 ## 4. /vs/[competitor] template (template: UI mockups)
 
-Redesign the comparison page TEMPLATE (6 static pages: wordpress-com, wp-engine, kinsta, pressable, cloudways, flywheel). Today: hero (headline, subhead), feature-by-feature table, 3 prose sections (why this comparison exists / where we differ / where the competitor wins - the honest section stays), FAQ, cross-links to other comparisons, CTA band. Keep all jobs including the "where the competitor wins" honesty section - it is a trust feature. Build with: ComparisonTable, FaqList, CtaBand. Improve: table readability (check/cross/text cells), keep prose sections but give them visual anchors.
+Redesign the comparison page TEMPLATE. 3 pages are live today (wordpress-com, pressable, flywheel) and 2 more ship with the redesign (kinsta, cloudways - the competitors the price-comparing segment actually evaluates; their comparison content gets authored at port-back). Today: hero (headline, subhead), feature-by-feature table, 3 prose sections (why this comparison exists / where we differ / where the competitor wins - the honest section stays), FAQ, cross-links to other comparisons, CTA band. Keep all jobs including the "where the competitor wins" honesty section - it is a trust feature. Build with: ComparisonTable, FaqList, CtaBand. Improve: table readability (check/cross/text cells), keep prose sections but give them visual anchors.
 
 ## 5. /for/[industry] template (template: UI mockups)
 
