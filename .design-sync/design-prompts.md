@@ -33,7 +33,7 @@ Redesign the comparison page TEMPLATE. 3 pages are live today (wordpress-com, pr
 
 ## 5. /for/[industry] template (template: UI mockups)
 
-Redesign the niche page TEMPLATE (3 pages: agencies, developers, ecommerce). Today: hero + illustration, pain-point cards, differentiator cards, optional starter-baseline recommendations, optional service cards (agencies only), FAQ, cross-links, CTA. Keep all jobs, but the hero illustration becomes an editorial photo-real persona image. Agencies uses assets/for-agencies-hero.png and developers uses assets/for-developers-hero.png (both approved, in this design project) - place the actual files. Ecommerce (store operator checking orders) gets a same-style image slot; its asset is generated next. Build with: FeatureCard, FaqList, CtaBand. Improve: pain-point cards should read as problems (not feature clones), differentiators tie each pain to a mechanism.
+Redesign the niche page TEMPLATE (3 pages: agencies, developers, ecommerce). Today: hero + illustration, pain-point cards, differentiator cards, optional starter-baseline recommendations, optional service cards (agencies only), FAQ, cross-links, CTA. Keep all jobs, but the hero illustration becomes an editorial photo-real persona image. All three approved assets are in this design project - place the actual files: agencies = assets/for-agencies-hero.png, developers = assets/for-developers-hero.png, ecommerce = assets/for-ecommerce-hero.png. Build with: FeatureCard, FaqList, CtaBand. Improve: pain-point cards should read as problems (not feature clones), differentiators tie each pain to a mechanism.
 
 ## 6. Services + Migrate (template: UI mockups)
 
