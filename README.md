@@ -72,7 +72,7 @@ export function HomePage() {
         />
       </div>
 
-      <div style={{ display: 'flex', gap: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20 }}>
         <PlanCard
           name="Starter" price="$9" period="/mo"
           features={['1 WordPress site', 'Shared pool server', 'Staging + restic backups', 'Free SSL']}
