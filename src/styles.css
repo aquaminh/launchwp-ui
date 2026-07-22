@@ -1,9 +1,489 @@
 /* launchwp UI - brand tokens + component styles.
-   RULES: extract token VALUES from the app's real palette (globals.css /
-   brand manifest), namespace everything --launchwp-* and .launchwp-*,
-   never invent colors. For class-mirror packages, snapshot the app's real
-   stylesheet via a prebuild cp instead. */
+   Source of truth: apps/launchwp/src/app/globals.css (Tailwind v4 @theme,
+   shadcn-style HSL token set). Values below are copied 1:1 from that file
+   and namespaced --launchwp-*; component classes are namespaced .launchwp-*.
+   Direction: dark-first technical aesthetic (Linear/Vercel register) - crisp
+   1px borders, restrained shadows, monospace for code-shaped values (status,
+   domains, prices). Both the light :root block and the .dark override block
+   are real and must both render correctly - never hardcode a hex outside
+   this token system. */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 
 :root {
-  /* TODO: real tokens from apps/launchwp */
+  /* Surfaces */
+  --launchwp-background: 0 0% 100%;
+  --launchwp-foreground: 228 28% 8%;
+  --launchwp-card: 0 0% 100%;
+  --launchwp-card-foreground: 228 28% 8%;
+  --launchwp-popover: 0 0% 100%;
+  --launchwp-popover-foreground: 228 28% 8%;
+
+  /* Brand */
+  --launchwp-primary: 221 83% 53%;
+  --launchwp-primary-foreground: 0 0% 100%;
+  --launchwp-secondary: 221 30% 95%;
+  --launchwp-secondary-foreground: 228 28% 8%;
+  --launchwp-muted: 228 20% 96%;
+  --launchwp-muted-foreground: 220 9% 46%;
+  --launchwp-accent: 221 100% 97%;
+  --launchwp-accent-foreground: 221 83% 48%;
+  --launchwp-destructive: 0 72% 51%;
+  --launchwp-destructive-foreground: 0 0% 100%;
+
+  /* Structure */
+  --launchwp-border: 228 24% 91%;
+  --launchwp-input: 228 24% 91%;
+  --launchwp-ring: 221 83% 53%;
+
+  /* Charts */
+  --launchwp-chart-1: 221 83% 53%;
+  --launchwp-chart-2: 142 71% 45%;
+  --launchwp-chart-3: 38 92% 50%;
+  --launchwp-chart-4: 262 83% 58%;
+  --launchwp-chart-5: 188 86% 43%;
+
+  /* Status */
+  --launchwp-success: 142 71% 45%;
+  --launchwp-success-foreground: 0 0% 100%;
+  --launchwp-warning: 38 92% 50%;
+  --launchwp-warning-bg: 48 96% 89%;
+  --launchwp-warning-foreground: 228 28% 8%;
+  --launchwp-info: 188 86% 43%;
+  --launchwp-info-foreground: 0 0% 100%;
+
+  /* Shape & depth */
+  --launchwp-radius-sm: 0.25rem;
+  --launchwp-radius-md: 0.375rem;
+  --launchwp-radius-lg: 0.5rem;
+  --launchwp-radius-xl: 0.75rem;
+  --launchwp-radius-full: 9999px;
+  --launchwp-radius: var(--launchwp-radius-lg);
+  --launchwp-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --launchwp-shadow-2: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+
+  /* Type */
+  --launchwp-font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --launchwp-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
+
+.dark {
+  --launchwp-background: 240 20% 4%;
+  --launchwp-foreground: 228 20% 95%;
+  --launchwp-card: 234 16% 9%;
+  --launchwp-card-foreground: 228 20% 95%;
+  --launchwp-popover: 234 16% 12%;
+  --launchwp-popover-foreground: 228 20% 95%;
+
+  --launchwp-primary: 221 88% 64%;
+  --launchwp-primary-foreground: 0 0% 100%;
+  --launchwp-secondary: 228 22% 15%;
+  --launchwp-secondary-foreground: 228 22% 87%;
+  --launchwp-muted: 234 16% 11%;
+  --launchwp-muted-foreground: 228 14% 61%;
+  --launchwp-accent: 221 38% 19%;
+  --launchwp-accent-foreground: 221 88% 73%;
+  --launchwp-destructive: 0 84% 60%;
+  --launchwp-destructive-foreground: 0 0% 100%;
+
+  --launchwp-border: 234 20% 18%;
+  --launchwp-input: 234 20% 18%;
+  --launchwp-ring: 221 88% 64%;
+
+  --launchwp-chart-1: 221 88% 64%;
+  --launchwp-chart-2: 142 68% 52%;
+  --launchwp-chart-3: 38 92% 58%;
+  --launchwp-chart-4: 262 80% 68%;
+  --launchwp-chart-5: 188 80% 52%;
+
+  --launchwp-success: 142 68% 52%;
+  --launchwp-warning: 38 92% 58%;
+  --launchwp-warning-bg: 38 60% 20%;
+  --launchwp-warning-foreground: 38 92% 88%;
+  --launchwp-info: 188 80% 52%;
+}
+
+/* ── Base ────────────────────────────────────────────────────────────── */
+.launchwp {
+  font-family: var(--launchwp-font-sans);
+  color: hsl(var(--launchwp-foreground));
+}
+.launchwp * { box-sizing: border-box; }
+.launchwp a { color: inherit; }
+.launchwp-mono { font-family: var(--launchwp-font-mono); }
+
+/* ── 1. Navbar ───────────────────────────────────────────────────────── */
+.launchwp-navbar {
+  font-family: var(--launchwp-font-sans);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 24px;
+  background: hsl(var(--launchwp-background) / 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid hsl(var(--launchwp-border));
+  color: hsl(var(--launchwp-foreground));
+}
+.launchwp-navbar__brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
+.launchwp-navbar__links { display: flex; gap: 20px; flex: 1; }
+.launchwp-navbar__link { font-size: 14px; font-weight: 500; text-decoration: none; color: hsl(var(--launchwp-muted-foreground)); transition: color 0.15s ease; }
+.launchwp-navbar__link:hover { color: hsl(var(--launchwp-foreground)); }
+.launchwp-navbar__link--active { color: hsl(var(--launchwp-foreground)); font-weight: 600; }
+.launchwp-navbar__toggles { display: flex; align-items: center; gap: 10px; }
+.launchwp-navbar__actions { display: flex; align-items: center; gap: 10px; }
+.launchwp-navbar__login {
+  font-size: 14px; font-weight: 500; text-decoration: none;
+  color: hsl(var(--launchwp-muted-foreground));
+  padding: 8px 4px;
+}
+.launchwp-navbar__login:hover { color: hsl(var(--launchwp-foreground)); }
+.launchwp-navbar__cta {
+  font-family: var(--launchwp-font-sans);
+  font-size: 14px; font-weight: 600;
+  padding: 9px 16px;
+  border-radius: var(--launchwp-radius-md);
+  background: hsl(var(--launchwp-primary));
+  color: hsl(var(--launchwp-primary-foreground));
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: opacity 0.15s ease;
+}
+.launchwp-navbar__cta:hover { opacity: 0.88; }
+
+/* ── 2. Hero ─────────────────────────────────────────────────────────── */
+.launchwp-hero {
+  font-family: var(--launchwp-font-sans);
+  position: relative;
+  padding: 88px 24px 64px;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 0%, hsl(var(--launchwp-primary) / 0.14), transparent),
+    radial-gradient(ellipse 50% 40% at 90% 10%, hsl(var(--launchwp-chart-4) / 0.10), transparent),
+    hsl(var(--launchwp-background));
+  color: hsl(var(--launchwp-foreground));
+  overflow: hidden;
+}
+.launchwp-hero__inner { position: relative; max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.launchwp-hero__badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em;
+  padding: 5px 12px;
+  border-radius: var(--launchwp-radius-full);
+  border: 1px solid hsl(var(--launchwp-border));
+  background: hsl(var(--launchwp-muted));
+  color: hsl(var(--launchwp-muted-foreground));
+  margin-bottom: 20px;
+}
+.launchwp-hero__title { font-size: 46px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 18px; }
+.launchwp-hero__title-line { display: block; }
+.launchwp-hero__title-line--accent { color: hsl(var(--launchwp-primary)); }
+.launchwp-hero__subhead { font-size: 17px; line-height: 1.6; color: hsl(var(--launchwp-muted-foreground)); max-width: 560px; margin: 0 0 28px; }
+.launchwp-hero__actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+.launchwp-hero__cta-primary, .launchwp-hero__cta-secondary {
+  font-family: var(--launchwp-font-sans); font-size: 15px; font-weight: 600;
+  padding: 12px 22px; border-radius: var(--launchwp-radius-md);
+  text-decoration: none; border: 1px solid transparent; transition: all 0.15s ease;
+}
+.launchwp-hero__cta-primary { background: hsl(var(--launchwp-primary)); color: hsl(var(--launchwp-primary-foreground)); }
+.launchwp-hero__cta-primary:hover { opacity: 0.88; }
+.launchwp-hero__cta-secondary { background: transparent; color: hsl(var(--launchwp-foreground)); border-color: hsl(var(--launchwp-border)); }
+.launchwp-hero__cta-secondary:hover { background: hsl(var(--launchwp-muted)); }
+.launchwp-hero__media {
+  width: 100%; max-width: 960px;
+  border-radius: var(--launchwp-radius-xl);
+  border: 1px solid hsl(var(--launchwp-border));
+  box-shadow: var(--launchwp-shadow-2);
+  overflow: hidden;
+  background: hsl(var(--launchwp-card));
+}
+
+/* ── 3. ProofStrip ───────────────────────────────────────────────────── */
+.launchwp-proof {
+  font-family: var(--launchwp-font-sans);
+  display: flex; flex-direction: column; gap: 24px;
+  padding: 32px 24px;
+  border-top: 1px solid hsl(var(--launchwp-border));
+  border-bottom: 1px solid hsl(var(--launchwp-border));
+  color: hsl(var(--launchwp-foreground));
+}
+.launchwp-proof__logos { display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; opacity: 0.75; }
+.launchwp-proof__stats { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
+.launchwp-proof__stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.launchwp-proof__stat-value { font-family: var(--launchwp-font-mono); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+.launchwp-proof__stat-label { font-size: 12.5px; color: hsl(var(--launchwp-muted-foreground)); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ── 4. FeatureCard ──────────────────────────────────────────────────── */
+.launchwp-feature-card {
+  font-family: var(--launchwp-font-sans);
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 22px;
+  border: 1px solid hsl(var(--launchwp-border));
+  border-radius: var(--launchwp-radius-lg);
+  background: hsl(var(--launchwp-card));
+  color: hsl(var(--launchwp-card-foreground));
+}
+.launchwp-feature-card__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: var(--launchwp-radius-md);
+  background: hsl(var(--launchwp-accent));
+  color: hsl(var(--launchwp-accent-foreground));
+}
+.launchwp-feature-card__title { font-size: 15.5px; font-weight: 700; margin: 0; }
+.launchwp-feature-card__body { font-size: 14px; line-height: 1.6; color: hsl(var(--launchwp-muted-foreground)); margin: 0; }
+.launchwp-feature-card__link { font-size: 13.5px; font-weight: 600; color: hsl(var(--launchwp-primary)); text-decoration: none; margin-top: 4px; }
+.launchwp-feature-card__link:hover { text-decoration: underline; }
+
+/* ── 5. PlanCard ─────────────────────────────────────────────────────── */
+.launchwp-plan-card {
+  font-family: var(--launchwp-font-sans);
+  position: relative;
+  display: flex; flex-direction: column; gap: 16px;
+  padding: 26px;
+  border: 1px solid hsl(var(--launchwp-border));
+  border-radius: var(--launchwp-radius-lg);
+  background: hsl(var(--launchwp-card));
+  color: hsl(var(--launchwp-card-foreground));
+  min-width: 240px;
+}
+.launchwp-plan-card--highlight { border: 2px solid hsl(var(--launchwp-primary)); box-shadow: var(--launchwp-shadow-2); }
+.launchwp-plan-card__flag {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em;
+  padding: 3px 12px; border-radius: var(--launchwp-radius-full);
+  background: hsl(var(--launchwp-primary)); color: hsl(var(--launchwp-primary-foreground));
+}
+.launchwp-plan-card__name { font-size: 15px; font-weight: 700; margin: 0; color: hsl(var(--launchwp-muted-foreground)); text-transform: uppercase; letter-spacing: 0.04em; }
+.launchwp-plan-card__price { font-family: var(--launchwp-font-mono); font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
+.launchwp-plan-card__price-period { font-family: var(--launchwp-font-sans); font-size: 14px; font-weight: 500; color: hsl(var(--launchwp-muted-foreground)); }
+.launchwp-plan-card__math { font-size: 12.5px; color: hsl(var(--launchwp-muted-foreground)); margin: -8px 0 0; }
+.launchwp-plan-card__features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 14px; }
+.launchwp-plan-card__features li { display: flex; gap: 9px; align-items: baseline; }
+.launchwp-plan-card__features li::before { content: "\2713"; color: hsl(var(--launchwp-success)); font-weight: 700; }
+.launchwp-plan-card__cta {
+  font-family: var(--launchwp-font-sans); font-size: 14.5px; font-weight: 600; text-align: center;
+  padding: 11px 18px; border-radius: var(--launchwp-radius-md);
+  text-decoration: none; border: 1px solid hsl(var(--launchwp-border));
+  color: hsl(var(--launchwp-foreground)); background: transparent;
+  transition: all 0.15s ease;
+}
+.launchwp-plan-card--highlight .launchwp-plan-card__cta {
+  background: hsl(var(--launchwp-primary)); color: hsl(var(--launchwp-primary-foreground)); border-color: transparent;
+}
+.launchwp-plan-card__cta:hover { background: hsl(var(--launchwp-muted)); }
+.launchwp-plan-card--highlight .launchwp-plan-card__cta:hover { opacity: 0.88; background: hsl(var(--launchwp-primary)); }
+
+/* ── 6. ComparisonTable ──────────────────────────────────────────────── */
+.launchwp-comparison-table {
+  font-family: var(--launchwp-font-sans);
+  width: 100%; border-collapse: collapse;
+  background: hsl(var(--launchwp-card));
+  border: 1px solid hsl(var(--launchwp-border));
+  border-radius: var(--launchwp-radius-lg);
+  overflow: hidden; font-size: 14px; color: hsl(var(--launchwp-card-foreground));
+}
+.launchwp-comparison-table th {
+  text-align: left; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+  color: hsl(var(--launchwp-muted-foreground)); background: hsl(var(--launchwp-muted));
+  padding: 12px 16px; border-bottom: 1px solid hsl(var(--launchwp-border));
+}
+.launchwp-comparison-table th:not(:first-child) { text-align: center; }
+.launchwp-comparison-table td { padding: 13px 16px; border-bottom: 1px solid hsl(var(--launchwp-border)); text-align: center; }
+.launchwp-comparison-table td:first-child { text-align: left; font-weight: 600; }
+.launchwp-comparison-table tr:last-child td { border-bottom: none; }
+.launchwp-comparison-table__cell--yes { color: hsl(var(--launchwp-success)); font-weight: 700; }
+.launchwp-comparison-table__cell--no { color: hsl(var(--launchwp-muted-foreground)); }
+
+/* ── 7. FaqList ──────────────────────────────────────────────────────── */
+.launchwp-faq { font-family: var(--launchwp-font-sans); display: flex; flex-direction: column; gap: 10px; }
+.launchwp-faq__item {
+  border: 1px solid hsl(var(--launchwp-border)); border-radius: var(--launchwp-radius-lg);
+  background: hsl(var(--launchwp-card)); padding: 4px 18px; color: hsl(var(--launchwp-card-foreground));
+}
+.launchwp-faq__question {
+  cursor: pointer; list-style: none; padding: 14px 0; font-size: 15px; font-weight: 600;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+}
+.launchwp-faq__question::-webkit-details-marker { display: none; }
+.launchwp-faq__question::after { content: "+"; font-weight: 400; color: hsl(var(--launchwp-muted-foreground)); font-size: 18px; }
+.launchwp-faq__item[open] .launchwp-faq__question::after { content: "\2212"; }
+.launchwp-faq__answer { font-size: 14px; line-height: 1.65; color: hsl(var(--launchwp-muted-foreground)); padding: 0 0 16px; margin: 0; }
+
+/* ── 8. CtaBand ──────────────────────────────────────────────────────── */
+.launchwp-cta-band {
+  font-family: var(--launchwp-font-sans);
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px;
+  padding: 56px 24px; border-radius: var(--launchwp-radius-xl);
+  background: hsl(var(--launchwp-foreground)); color: hsl(var(--launchwp-background));
+}
+.launchwp-cta-band__title { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; margin: 0; }
+.launchwp-cta-band__subhead { font-size: 15.5px; opacity: 0.75; max-width: 480px; margin: 0; }
+.launchwp-cta-band__actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+.launchwp-cta-band__cta-primary, .launchwp-cta-band__cta-secondary {
+  font-family: var(--launchwp-font-sans); font-size: 15px; font-weight: 600;
+  padding: 12px 22px; border-radius: var(--launchwp-radius-md);
+  text-decoration: none; border: 1px solid transparent; transition: all 0.15s ease;
+}
+.launchwp-cta-band__cta-primary { background: hsl(var(--launchwp-primary)); color: hsl(var(--launchwp-primary-foreground)); }
+.launchwp-cta-band__cta-primary:hover { opacity: 0.88; }
+.launchwp-cta-band__cta-secondary { background: transparent; color: inherit; border-color: hsl(var(--launchwp-background) / 0.25); }
+.launchwp-cta-band__cta-secondary:hover { background: hsl(var(--launchwp-background) / 0.08); }
+
+/* ── 9. Footer ───────────────────────────────────────────────────────── */
+.launchwp-footer {
+  font-family: var(--launchwp-font-sans);
+  border-top: 1px solid hsl(var(--launchwp-border));
+  padding: 44px 24px 24px; color: hsl(var(--launchwp-foreground));
+}
+.launchwp-footer__top { display: flex; gap: 56px; flex-wrap: wrap; margin-bottom: 32px; }
+.launchwp-footer__brand { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 8px; }
+.launchwp-footer__tagline { font-size: 13.5px; color: hsl(var(--launchwp-muted-foreground)); max-width: 260px; margin: 0; }
+.launchwp-footer__columns { display: flex; gap: 48px; flex-wrap: wrap; flex: 1; justify-content: flex-end; }
+.launchwp-footer__col h4 {
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+  color: hsl(var(--launchwp-muted-foreground)); margin: 0 0 12px;
+}
+.launchwp-footer__col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.launchwp-footer__col a { font-size: 13.5px; text-decoration: none; color: hsl(var(--launchwp-foreground)); }
+.launchwp-footer__col a:hover { color: hsl(var(--launchwp-primary)); }
+.launchwp-footer__bottom {
+  border-top: 1px solid hsl(var(--launchwp-border)); padding-top: 18px;
+  font-size: 12.5px; color: hsl(var(--launchwp-muted-foreground));
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+}
+
+/* ── 10. DashboardShell ──────────────────────────────────────────────── */
+.launchwp-dashboard-shell {
+  font-family: var(--launchwp-font-sans);
+  display: flex; min-height: 100%; min-height: 100vh;
+  background: hsl(var(--launchwp-muted)); color: hsl(var(--launchwp-foreground));
+}
+.launchwp-dashboard-shell__sidebar {
+  width: 240px; flex-shrink: 0; display: flex; flex-direction: column;
+  background: hsl(var(--launchwp-card)); border-right: 1px solid hsl(var(--launchwp-border));
+  padding: 20px 14px;
+}
+.launchwp-dashboard-shell__logo { font-weight: 700; font-size: 15px; padding: 0 8px 20px; letter-spacing: -0.01em; }
+.launchwp-dashboard-shell__nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.launchwp-dashboard-shell__nav-item {
+  display: flex; align-items: center; gap: 10px; padding: 9px 10px;
+  border-radius: var(--launchwp-radius-md); font-size: 14px; font-weight: 500;
+  text-decoration: none; color: hsl(var(--launchwp-muted-foreground));
+}
+.launchwp-dashboard-shell__nav-item:hover { background: hsl(var(--launchwp-muted)); color: hsl(var(--launchwp-foreground)); }
+.launchwp-dashboard-shell__nav-item--active { background: hsl(var(--launchwp-accent)); color: hsl(var(--launchwp-accent-foreground)); font-weight: 600; }
+.launchwp-dashboard-shell__nav-icon { display: inline-flex; width: 16px; height: 16px; flex-shrink: 0; }
+.launchwp-dashboard-shell__signout {
+  display: flex; align-items: center; gap: 10px; padding: 9px 10px; margin-top: 10px;
+  border-radius: var(--launchwp-radius-md); font-size: 14px; font-weight: 500;
+  color: hsl(var(--launchwp-muted-foreground)); background: transparent; border: none; cursor: pointer;
+  border-top: 1px solid hsl(var(--launchwp-border)); padding-top: 14px;
+}
+.launchwp-dashboard-shell__signout:hover { color: hsl(var(--launchwp-destructive)); }
+.launchwp-dashboard-shell__topbar {
+  display: none; align-items: center; justify-content: space-between;
+  padding: 12px 16px; border-bottom: 1px solid hsl(var(--launchwp-border));
+  background: hsl(var(--launchwp-card));
+}
+.launchwp-dashboard-shell__main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.launchwp-dashboard-shell__content { flex: 1; padding: 28px; }
+@media (max-width: 860px) {
+  .launchwp-dashboard-shell__sidebar { display: none; }
+  .launchwp-dashboard-shell__topbar { display: flex; }
+}
+
+/* ── 11. SiteCard ────────────────────────────────────────────────────── */
+.launchwp-site-card {
+  font-family: var(--launchwp-font-sans);
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 18px 20px; border: 1px solid hsl(var(--launchwp-border));
+  border-radius: var(--launchwp-radius-lg); background: hsl(var(--launchwp-card));
+  color: hsl(var(--launchwp-card-foreground));
+}
+.launchwp-site-card__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.launchwp-site-card__name { font-size: 15px; font-weight: 700; margin: 0 0 2px; }
+.launchwp-site-card__domain { font-family: var(--launchwp-font-mono); font-size: 12.5px; color: hsl(var(--launchwp-muted-foreground)); }
+.launchwp-site-card__meta { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12.5px; color: hsl(var(--launchwp-muted-foreground)); }
+.launchwp-site-card__meta strong { color: hsl(var(--launchwp-foreground)); font-weight: 600; }
+.launchwp-site-card__actions { display: flex; gap: 8px; padding-top: 4px; border-top: 1px solid hsl(var(--launchwp-border)); margin-top: 2px; padding-top: 12px; }
+
+/* ── 12. StatusBadge ─────────────────────────────────────────────────── */
+.launchwp-status-badge {
+  font-family: var(--launchwp-font-mono);
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+  padding: 3px 10px; border-radius: var(--launchwp-radius-full);
+  border: 1px solid transparent;
+}
+.launchwp-status-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.launchwp-status-badge--ready { background: hsl(var(--launchwp-success) / 0.14); color: hsl(var(--launchwp-success)); }
+.launchwp-status-badge--approved { background: hsl(var(--launchwp-success) / 0.14); color: hsl(var(--launchwp-success)); }
+.launchwp-status-badge--provisioning { background: hsl(var(--launchwp-info) / 0.14); color: hsl(var(--launchwp-info)); }
+.launchwp-status-badge--pending { background: hsl(var(--launchwp-warning-bg)); color: hsl(var(--launchwp-warning-foreground)); }
+.launchwp-status-badge--suspended { background: hsl(var(--launchwp-warning-bg)); color: hsl(var(--launchwp-warning-foreground)); }
+.launchwp-status-badge--deleting { background: hsl(var(--launchwp-muted)); color: hsl(var(--launchwp-muted-foreground)); }
+.launchwp-status-badge--error { background: hsl(var(--launchwp-destructive) / 0.14); color: hsl(var(--launchwp-destructive)); }
+.launchwp-status-badge--rejected { background: hsl(var(--launchwp-destructive) / 0.14); color: hsl(var(--launchwp-destructive)); }
+
+/* ── 13. ApprovalQueueCard ───────────────────────────────────────────── */
+.launchwp-approval-card {
+  font-family: var(--launchwp-font-sans);
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 18px 20px; border: 1px solid hsl(var(--launchwp-border));
+  border-left: 3px solid hsl(var(--launchwp-primary));
+  border-radius: var(--launchwp-radius-lg); background: hsl(var(--launchwp-card));
+  color: hsl(var(--launchwp-card-foreground));
+}
+.launchwp-approval-card__head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.launchwp-approval-card__kind {
+  font-family: var(--launchwp-font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+  padding: 3px 9px; border-radius: var(--launchwp-radius-sm);
+  background: hsl(var(--launchwp-accent)); color: hsl(var(--launchwp-accent-foreground));
+}
+.launchwp-approval-card__site { font-size: 13.5px; font-weight: 600; color: hsl(var(--launchwp-muted-foreground)); }
+.launchwp-approval-card__body { font-size: 14px; line-height: 1.6; margin: 0; }
+.launchwp-approval-card__meta { font-size: 12.5px; color: hsl(var(--launchwp-muted-foreground)); }
+.launchwp-approval-card__actions { display: flex; gap: 8px; padding-top: 4px; border-top: 1px solid hsl(var(--launchwp-border)); padding-top: 12px; }
+.launchwp-approval-card__approve, .launchwp-approval-card__reject {
+  font-family: var(--launchwp-font-sans); font-size: 13.5px; font-weight: 600;
+  padding: 8px 16px; border-radius: var(--launchwp-radius-md); cursor: pointer;
+  border: 1px solid hsl(var(--launchwp-border)); background: transparent; color: hsl(var(--launchwp-foreground));
+  transition: all 0.15s ease;
+}
+.launchwp-approval-card__approve { background: hsl(var(--launchwp-success)); color: hsl(var(--launchwp-success-foreground)); border-color: transparent; }
+.launchwp-approval-card__approve:hover { opacity: 0.88; }
+.launchwp-approval-card__reject:hover { background: hsl(var(--launchwp-destructive) / 0.1); color: hsl(var(--launchwp-destructive)); border-color: hsl(var(--launchwp-destructive) / 0.3); }
+
+/* ── 14. StatStrip ───────────────────────────────────────────────────── */
+.launchwp-stat-strip { font-family: var(--launchwp-font-sans); display: flex; gap: 0; flex-wrap: wrap; }
+.launchwp-stat-strip__item {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 16px 24px; flex: 1; min-width: 140px;
+  border-right: 1px solid hsl(var(--launchwp-border));
+}
+.launchwp-stat-strip__item:last-child { border-right: none; }
+.launchwp-stat-strip__icon { color: hsl(var(--launchwp-muted-foreground)); margin-bottom: 2px; }
+.launchwp-stat-strip__label { font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: hsl(var(--launchwp-muted-foreground)); }
+.launchwp-stat-strip__value { font-family: var(--launchwp-font-mono); font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.launchwp-stat-strip__sublabel { font-size: 12.5px; color: hsl(var(--launchwp-muted-foreground)); }
+
+/* ── 15. WizardSteps ─────────────────────────────────────────────────── */
+.launchwp-wizard-steps { font-family: var(--launchwp-font-sans); display: flex; align-items: center; width: 100%; }
+.launchwp-wizard-steps__step { display: flex; align-items: center; gap: 10px; }
+.launchwp-wizard-steps__index {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  font-family: var(--launchwp-font-mono); font-size: 12.5px; font-weight: 700;
+  border: 1px solid hsl(var(--launchwp-border)); color: hsl(var(--launchwp-muted-foreground)); background: hsl(var(--launchwp-card));
+}
+.launchwp-wizard-steps__label { font-size: 13.5px; font-weight: 500; color: hsl(var(--launchwp-muted-foreground)); white-space: nowrap; }
+.launchwp-wizard-steps__connector { flex: 1; height: 1px; background: hsl(var(--launchwp-border)); margin: 0 12px; min-width: 24px; }
+.launchwp-wizard-steps__step--done .launchwp-wizard-steps__index {
+  background: hsl(var(--launchwp-success)); border-color: transparent; color: hsl(var(--launchwp-success-foreground));
+}
+.launchwp-wizard-steps__step--done .launchwp-wizard-steps__label { color: hsl(var(--launchwp-foreground)); }
+.launchwp-wizard-steps__step--current .launchwp-wizard-steps__index {
+  background: hsl(var(--launchwp-primary)); border-color: transparent; color: hsl(var(--launchwp-primary-foreground));
+}
+.launchwp-wizard-steps__step--current .launchwp-wizard-steps__label { color: hsl(var(--launchwp-foreground)); font-weight: 700; }
+.launchwp-wizard-steps__connector--done { background: hsl(var(--launchwp-success)); }
