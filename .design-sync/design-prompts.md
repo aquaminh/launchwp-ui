@@ -49,7 +49,7 @@ The /blueprints URL survives for SEO but is REFRAMED as "Starter baselines" and 
 
 ## 9. Blog index (template: UI mockups)
 
-Redesign /blog. Today: hero + post card grid with NO images. Design the card for an optional cover image with a clean no-image fallback (the query currently selects no image field - the port-back adds per-post cover/OG support; default covers are editorial photo-real AI-generated assets in the same imagery direction).
+Redesign /blog. Today: hero + post card grid with NO images. Design the card for an optional cover image with a clean no-image fallback (the query currently selects no image field - the port-back adds per-post cover/OG support). The approved default cover is assets/blog-og-default-cover.png (in this design project) - wide negative space on the left is reserved for title overlay; use the actual file in the card and OG mockups.
 
 ---
 
