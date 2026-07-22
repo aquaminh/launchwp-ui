@@ -8,7 +8,7 @@ Global constraints (apply to every prompt, restated in conventions.md):
 - Dark-first technical aesthetic (Linear/Vercel register), but every screen must also work in light mode - use tokens only.
 - Honest proof only: no fabricated customer counts, logos of real infra vendors only (WordPress, DigitalOcean, Cloudflare, Let's Encrypt, Redis), real product screenshots.
 - Terminology: "human-approved AI" / "approval queue" / "review queue" - never "governance/governed".
-- Imagery: editorial photo-real, candid warm-lit humans-in-the-loop (a person reviewing a change, an agency owner with a client, a developer at a terminal) - never mascots, glossy 3D, or stock-photo grins. Design pages with image SLOTS at the noted spots; final assets are AI-generated (gpt-image) and supplied at port-back. Product UI moments are rendered with this design system's own components (ApprovalQueueCard, SiteCard, WizardSteps...), never screenshots of the old UI.
+- Imagery: editorial photo-real, candid warm-lit humans-in-the-loop (a person reviewing a change, an agency owner with a client, a developer at a terminal) - never mascots, glossy 3D, or stock-photo grins. Approved assets live in this project under assets/ - when a prompt names one, place the ACTUAL file in the design (not a placeholder). Placements whose asset is not generated yet get an image SLOT in the same style; assets are generated one at a time as placements are approved. Product UI moments are rendered with this design system's own components (ApprovalQueueCard, SiteCard, WizardSteps...), never screenshots of the old UI.
 - Blueprints are DEMOTED product-wide: no Blueprints nav item, no homepage blueprints band. The concept survives only as "starter baselines" - a wizard step plus one reframed page.
 
 ---
@@ -37,7 +37,7 @@ Redesign the niche page TEMPLATE (6 pages: developers, agencies, ecommerce, +3).
 
 ## 6. Services + Migrate (template: UI mockups)
 
-Redesign the two near-identical service pages. Today each is: hero text + a payment form (tier picker, URL/email fields, PayPal buttons) - zero visuals, the barest pages on the site. Keep the form jobs untouched (PayPal flow, Turnstile). Add: a 3-step "what happens after payment" strip (we email within 1 business day -> you reply with admin access -> DNS+SSL cutover handled), a small honest-proof row, and an editorial photo-real image slot in the reassurance column (a specialist carefully handling a migration/handover - asset AI-generated, supplied at port-back). Build with: CtaBand, StatStrip/WizardSteps + the existing form dropped into a two-column layout (form right, reassurance left).
+Redesign the two near-identical service pages. Today each is: hero text + a payment form (tier picker, URL/email fields, PayPal buttons) - zero visuals, the barest pages on the site. Keep the form jobs untouched (PayPal flow, Turnstile). Add: a 3-step "what happens after payment" strip (we email within 1 business day -> you reply with admin access -> DNS+SSL cutover handled), a small honest-proof row, and the approved editorial image assets/migrate-handover.png (in this design project) placed in the reassurance column - use the actual file, cropped as needed, not a placeholder. Build with: CtaBand, StatStrip/WizardSteps + the existing form dropped into a two-column layout (form right, reassurance left).
 
 ## 7. AI-ready (template: UI mockups)
 
