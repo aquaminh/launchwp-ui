@@ -1,2 +1,18 @@
-// Export every component with its Props interface, e.g.:
-// export { Button, type ButtonProps } from './Button';
+// Public surface
+export { Navbar, type NavbarProps, type NavbarLink } from './Navbar';
+export { Hero, type HeroProps } from './Hero';
+export { ProofStrip, type ProofStripProps, type ProofStripStat } from './ProofStrip';
+export { FeatureCard, type FeatureCardProps } from './FeatureCard';
+export { PlanCard, type PlanCardProps } from './PlanCard';
+export { ComparisonTable, type ComparisonTableProps, type ComparisonRow } from './ComparisonTable';
+export { FaqList, type FaqListProps, type FaqItem } from './FaqList';
+export { CtaBand, type CtaBandProps } from './CtaBand';
+export { Footer, type FooterProps, type FooterColumn } from './Footer';
+
+// Dashboard surface
+export { DashboardShell, type DashboardShellProps, type DashboardNavItem } from './DashboardShell';
+export { SiteCard, type SiteCardProps } from './SiteCard';
+export { StatusBadge, type StatusBadgeProps, type SiteStatus } from './StatusBadge';
+export { ApprovalQueueCard, type ApprovalQueueCardProps } from './ApprovalQueueCard';
+export { StatStrip, type StatStripProps, type StatStripItem } from './StatStrip';
+export { WizardSteps, type WizardStepsProps } from './WizardSteps';
