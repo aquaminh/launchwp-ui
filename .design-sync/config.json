@@ -1,0 +1,23 @@
+{
+  "projectId": "063d76b5-c744-4aac-b23a-85aef7f5fe3b",
+  "pkg": "@launchwp/ui",
+  "globalName": "LaunchwpUI",
+  "shape": "package",
+  "buildCmd": "npm run build",
+  "cssEntry": "src/styles.css",
+  "overrides": {
+    "Navbar": { "cardMode": "column" },
+    "Hero": { "cardMode": "column" },
+    "ProofStrip": { "cardMode": "column" },
+    "ComparisonTable": { "cardMode": "column" },
+    "PlanCard": { "cardMode": "column" },
+    "CtaBand": { "cardMode": "column" },
+    "Footer": { "cardMode": "column" },
+    "DashboardShell": { "cardMode": "column" },
+    "StatStrip": { "cardMode": "column" },
+    "ApprovalQueueCard": { "cardMode": "column" },
+    "FeatureCard": { "cardMode": "column" },
+    "SiteCard": { "cardMode": "column" }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}
