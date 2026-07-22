@@ -1,0 +1,9 @@
+/* launchwp UI - brand tokens + component styles.
+   RULES: extract token VALUES from the app's real palette (globals.css /
+   brand manifest), namespace everything --launchwp-* and .launchwp-*,
+   never invent colors. For class-mirror packages, snapshot the app's real
+   stylesheet via a prebuild cp instead. */
+
+:root {
+  /* TODO: real tokens from apps/launchwp */
+}
