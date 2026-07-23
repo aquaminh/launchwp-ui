@@ -109,7 +109,10 @@
   color: hsl(var(--launchwp-foreground));
 }
 .launchwp * { box-sizing: border-box; }
-.launchwp a { color: inherit; }
+/* :where() keeps this reset at (0,1,0) so single-class component color rules
+   (.launchwp-hero__cta-primary etc.), which come later in the file, win by
+   source order. A bare `.launchwp a` (0,1,1) silently outranked every CTA color. */
+.launchwp :where(a) { color: inherit; }
 .launchwp-mono { font-family: var(--launchwp-font-mono); }
 
 /* ── 1. Navbar ───────────────────────────────────────────────────────── */
