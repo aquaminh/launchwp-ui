@@ -8,7 +8,9 @@
    are real and must both render correctly - never hardcode a hex outside
    this token system. */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+/* Fonts are the CONSUMER's job (the app loads Inter + JetBrains Mono via
+   next/font; the DS render harness injects its own). A hard @import here got
+   CSP-blocked in the app and spammed the console on every page. */
 
 :root {
   /* Surfaces */
