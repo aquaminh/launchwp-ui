@@ -1,0 +1,17 @@
+<!-- Approved design: /dashboard/sites/new wizard (project b32dffdb). Layout truth only; mockup TEXT/DATA never a source.
+DATA/HONESTY CORRECTIONS AT PORT:
+- Design's baselines (blank/blog/business/store/portfolio) are INVENTED - use the REAL STARTER_BLUEPRINTS config + the existing blank/"quick launch" path and per-starter icons. Keep the real live slug-availability check on the name field (debounced, shows taken/free) - the design omitted it but it MUST stay.
+- Region cards: render from the REAL RegionOption[] the server provides (shared plans only see regions with live capacity - do not hardcode sgp1/blr1 as always-present; the 2-col card layout with map-pin icon, mono region-slug chip, latency blurb, and check-on-selected applies to WHATEVER regions come back; latency blurbs: sgp1 "Low latency across South-East Asia, Oceania, and East Asia." blr1 "Low latency across India and South Asia."). Keep the "This can't be changed after launch" note - true.
+- "Included on your plan" box: reuse the REAL plan-inclusions the current NameStep renders (per-plan facts; approval queue + MCP Adapter are on EVERY plan - never present as Pro-only; "Daily" backups not "Nightly"; real WP version claims come from existing copy - never "WordPress 6.6.1").
+- Launch flow: the REAL app submits and redirects to the new site's detail page, which already shows provisioning status. KEEP that mechanic. The design's inline launching-stages + "Your site is ready" panels are NOT ported this round (would duplicate the detail page's provisioning UX) - note as intentionally skipped. The submit error states (no_capacity, site_limit_reached, storage_quota_exceeded) MUST keep rendering.
+- Full-screen wizard chrome: the design replaces the dashboard shell with a focused topbar (logo + divider + "Create a new site" label; right: ThemeToggle + "Exit" outline button -> /dashboard/sites). Port this layout for the wizard route (it may keep living under the (account) layout - render the focused chrome inside the content area, or restructure if the layout allows cleanly; preserve auth).
+- Dashboard is ENGLISH-ONLY.
+
+STRUCTURE:
+1. Topbar (14px 22px padding, border-b, card bg): logo + "Create a new site"; ThemeToggle + Exit.
+2. Centered column max 760px: WizardSteps (labels "Name & region" / "Starter baseline" / "Review & launch", current step).
+3. Step 1: h1 21px "Name your site" + sub "You can add a custom domain after launch."; 44px name input; "Reachable at <mono subdomain>" line (+ keep availability state); "Choose a region" h2 + sub + 2-col region cards (selected: accent bg + 2px primary border + shadow); "Included on your <plan> plan" bordered card - uppercase label + 2-col check grid of real inclusions.
+4. Step 2: h1 "Choose a starter baseline" + sub "Optional starting points... You can change anything after launch."; auto-fill minmax(220px,1fr) selectable cards (icon chip accent bg, name, desc, check when selected) from real config.
+5. Step 3: h1 "Review & launch" + sub; bordered rows card (Site name / Address mono / Region / Starter baseline); StatStrip card with REAL values (Region, Plan + price, Storage included, Backups "Daily - offsite restic").
+6. Footer bar (border-t): left = Back (outline, when step>0) + step-1-only "Skip - launch a blank site now" underline link (real quick-launch path, disabled until name+region valid); right = primary Continue/"Launch site" button (40px, disabled at 0.5 opacity until valid).
+-->

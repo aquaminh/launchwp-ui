@@ -1,0 +1,24 @@
+<!-- Approved design: Features (project e77fde1e). Layout truth only; mockup TEXT never a copy source.
+HONESTY CORRECTIONS REQUIRED AT PORT (design invented claims that are FALSE for this product):
+- "Cloudflare edge" caching + "Edge WAF (Cloudflare)": WRONG. Cloudflare is DNS-only per-record A records. Real stack: server-level page caching, 6G WAF + fail2ban (use existing features.sec.b1/b2, features.perf.b2 keys).
+- "Isolated sites ... own container": WRONG mechanism. Real: per-site jailed SSH users + per-site php-fpm pools. Phrase via existing features.sec.b5 key.
+- "2FA + audit log": 2FA DOES NOT EXIST - drop 2FA, audit log is real.
+- "Patches on approval ... propose to your queue": overstated - managed updates are features.mgmt.b3; the approval queue governs AI-proposed changes (MCP/agent), not every core update. Use existing keys.
+- perfMetrics "78 ms TTFB / 98.4% cache hit / 100% uptime": FABRICATED STATS - banned. Replace the metrics card with stack facts (PHP 8.3 + OPcache / Redis object cache / HTTP/2 + Brotli - from features.perf.b3/b1/b4), NOT invented measurements.
+- Theme list Astra/GeneratePress/Blocksy + "wp theme activate astra": use the REAL catalog names (Kadence + premium starters BeTheme, Flatsome, JNews) and "wp theme activate kadence".
+- "EN + VI dashboard" bullet: WRONG - the dashboard is English-only (i18n covers the public surface). Drop it (use an existing mgmt bullet instead).
+- "HTTP/3": existing copy says HTTP/2 - keep HTTP/2 + Brotli (features.perf.b4).
+- CTA "connect the agent, approve the first change" - fine as aspiration but wire existing features.ctaTitle/ctaSubhead keys.
+
+STRUCTURE:
+1. Hero: centered 760px; pill badge "Features"; h1 42px; subhead 17px. Keys: features.heroTitle/heroSubhead (meta.features.* for metadata).
+2. Overview: 4 FeatureCard pillars (Performance/Security/Management/GPL Themes) with icons + anchor links (#performance #security #management #themes) - "Jump to <x>" links.
+3. Deep-dive rows (max 1120px, 92px gaps, alternating art side via lwp-row / lwp-row--flip):
+   Row 01 Performance (art right): kicker "01 - Performance" mono primary; h2 29px; intro; 2-col bullet grid, 6 bullets each = bold lead + muted desc with primary check icon. Bullets map to features.perf.b1..b6. Art = SiteCard (fittric.com, ready, Singapore sgp1, storage) stacked over a card of 3 STACK FACTS (see corrections - no fake metrics).
+   Row 02 Security (art left): kicker "02 - Security"; bullets features.sec.b1..b6. Art = terminal window (traffic-light dots header "fittric.com - ssl") showing an ssl:renew transcript (mono 13px lines: command foreground, steps muted, final success line success-colored) + StatusBadge approved below. Terminal lines may stay as-is (product-flavored demo output, factually fine: LE renewal via HTTP-01).
+   Row 03 Management (art right): kicker "03 - Management"; bullets features.mgmt.b1..b6. Art = ApprovalQueueCard (kind WP-CLI, fittric.com, WooCommerce update text, "Proposed 2 hours ago - via MCP Adapter").
+   Row 04 GPL Themes (art left): kicker "04 - GPL Themes"; bullets features.gpl.b1..b6. Art = "Theme library" card list (avatar mark, name, version mono, Installed/Available success state) with REAL theme names + footer line "$ wp theme activate kadence".
+4. CTA band (CtaBand): features.ctaTitle/ctaSubhead + CTAs to /register and /pricing.
+5. Footer: app's own.
+Bullet grid = 2 cols desktop / 1 col mobile; row grids 1fr/1fr with 60px gap, stack on <=900px (copy first).
+-->

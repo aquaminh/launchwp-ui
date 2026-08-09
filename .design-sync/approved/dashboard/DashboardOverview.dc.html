@@ -1,0 +1,19 @@
+<!-- Approved design: /dashboard overview (project b32dffdb "LaunchWP Dashboard UI"). Layout truth only; mockup TEXT/DATA never a source.
+DATA/HONESTY CORRECTIONS AT PORT:
+- "Welcome back, Maya" -> real customer first name from the session.
+- Banner "Pro plan - active ... Visa ending 4242": WRONG twice - billing is PAYPAL (never show a card); use the REAL subscription state the current DashboardOverview already loads (plan name, status, renewal/next-billing date, price). Keep the design's compact single-line banner with status dot + "Manage billing" link; dismissible (local state only). Cancelled/suspended states reuse the existing banner logic restyled.
+- Review queue items/sites/activity are DEMO SEEDS - wire the REAL PendingApprovalsCard data (AiEditReview pending rows across the customer's sites) into ApprovalQueueCard renders; Approve/Reject call the EXISTING handlers/routes exactly as PendingApprovalsCard does today (optimistic removal OK if current code does it).
+- "Recent activity": if a cross-site decided-review feed is cheap from existing data (AiEditReview decided rows ordered by decidedAt, limit ~4-6), build it server-side and render the design's list (status dot success/destructive, text, Approved/Rejected verb + mono site + relative time). If the data shape isn't there, OMIT the column (grid collapses to 1fr) rather than fake it.
+- StatStrip 4 KPIs from real data: Current plan (name + $X/mo), Sites (n / limit + "k provisioning" sublabel if any), Pending approvals (count), Storage (used of quota - reuse the storage numbers the sites page banners already compute; omit this KPI if not cheaply available server-side).
+- "New site" primary CTA -> /dashboard/sites/new. "View all" -> keep in-page (no /approvals route exists - point to the existing reviews surface: site detail panels; simplest = omit the link or point to /dashboard/sites). Do NOT invent routes.
+- Theme toggle in the dashboard header: reuse the existing ThemeToggle component (dashboard now inherits dark default).
+- Dashboard is ENGLISH-ONLY (no i18n keys needed).
+
+STRUCTURE (inside the existing DashboardSidebar shell - keep the shell component, restyle content only):
+1. Header row: h1 22px "Welcome back, <name>" + dynamic subhead ("N AI-proposed changes are waiting for your review." / "No changes waiting for review - you're all caught up."); right: ThemeToggle (36px) + primary "New site" button (36px, plus icon).
+2. Subscription banner (single-line, card bg, status dot, plan + real billing facts mono, Manage billing link, dismiss X).
+3. Review queue section FIRST: h2 16px + pending StatusBadge + reassurance line ("Nothing reaches production until you approve it..."); ApprovalQueueCard list (real pending) OR the all-caught-up empty state (dashed border card, green check circle, "You're all caught up" - WITHOUT the design's "Bring back sample changes" demo button).
+4. StatStrip in a bordered card (4 real KPIs).
+5. Two-column grid 1.6fr/1fr (stacks on mobile): "Your sites" SiteCard auto-fill grid (minmax 238px; real sites, Manage -> site detail, Visit only when ready) + "Recent activity" bordered list card (see corrections).
+Max width 1180, gaps 22px, section h2s 16px/700.
+-->

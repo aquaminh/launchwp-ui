@@ -1,0 +1,17 @@
+<!-- Approved design: /vs/[competitor] template (project e77fde1e). Layout truth only; mockup TEXT never a copy source.
+CONTENT SOURCE + CORRECTIONS:
+- 3 live pages: content = src/config/comparisons.ts + comparisons.vi.ts (rows, sections prose, faqs) at real cardinality. The mockup's rows are INVENTED and contain at least one factual error our own config refutes: it marks Pressable "MCP Adapter for AI clients: false" - WRONG, Pressable markets native MCP hosting (our config says so honestly). NEVER regress the config's honest claims.
+- kinsta + cloudways are NEW pages: author fresh config entries (EN+VI) at port time. The mockup's draft rows/verdicts are a SKELETON only - every competitor claim must be re-verified against their public pricing/features (July 2026) and follow the existing config's honest structure (rows, whyExists, whereDiffer, whereTheyWin, faqs, description). Add both to generateStaticParams via config, sitemap auto-follows; cross-links include them.
+- New i18n key for the table disclaimer line ("<name> details reflect publicly listed plans at time of writing - check their site for current pricing. LaunchWP columns are what every plan includes.").
+- The honesty closing line in the "where they win" card ("We keep this section honest on purpose. If one of these matters more to you than the approval queue, <name> may be the better call.") = new i18n key with {name} interpolation.
+
+STRUCTURE:
+1. Hero: centered 760px; pill badge "Comparison" (compare.badge); h1 "LaunchWP vs <name>" 42px; subhead = config subhead.
+2. ComparisonTable (ui component) max 1000px + small muted disclaimer line under it.
+3. "Why this comparison exists": centered 720px; round accent icon chip; mono kicker; the config's first prose section rendered as a large 19px medium-weight pull-quote paragraph.
+4. Verdict two-column grid (1fr/1fr, stacks <=820): LEFT card (primary-tinted border, bolt icon chip, h2 "Where LaunchWP pulls ahead") = config's differ section prose; RIGHT card (muted bg, scale icon chip, h2 "Where <name> wins") = config's competitor-wins prose + the honesty closing line under a top border. Config sections are PROSE - render as paragraphs inside the cards; only bulletize if the config text is already list-like. Section TITLES come from config section titles where present.
+5. FAQ: centered kicker + h2 (compare.commonQuestions); FaqList = config faqs; keep FAQPage JSON-LD.
+6. Cross-links: small muted heading (compare.alsoCompare); 4-col grid (2/1 on small) of "vs <name>" cards with arrow, border hover primary - links to the OTHER comparisons (now 4 others once kinsta+cloudways exist).
+7. CtaBand (compare.ctaTitle/ctaSubhead + compare.migrateCta secondary), Footer = app's own.
+Max width 1000px main, 760px FAQ; paddings ~60px.
+-->

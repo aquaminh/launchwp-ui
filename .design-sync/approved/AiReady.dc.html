@@ -1,0 +1,17 @@
+<!-- Approved design: /ai-ready (project e77fde1e). Layout truth only; mockup TEXT never a copy source.
+CONTENT/HONESTY NOTES:
+- Checklist section: use the REAL aiReady.item1..item6 keys (block theme + WP7 check / Connectors + BYOK / safe publishing workflow / backups+staging+rollback / SEO+schema defaults / agency AI standards) - the mockup invented a different 6 (approval-model themed); existing keys win. (The mockup's framing is noted as a possible future copy proposal - NOT ported now.)
+- "This is the real approval-queue component from the LaunchWP dashboard" - soften to a claim that is precisely true: it is the same approval flow the dashboard provides (the marketing page renders the design-system component, not a screenshot). New i18n key.
+- Service band price = real SERVICE_TIERS ai-ready-setup $299; "Or do it yourself, free ->" is honest (approval queue ships on every plan) - keep, link to /register.
+- Animation frame: v1 PORT USES HeroApprovalDemo (the existing client component) inside the 16:9 framed card + caption; porting the actual animation loop (hero-approval-loop.jsx, scenes Propose/Review/Approve/Clear, loop mode) is a follow-up - fetch that jsx from the design project when doing it.
+- Hero: ui Hero component, text-only (no media): aiReady.heroBadge / aiReady.heroTitle (split across titleTop/titleBottom at a natural comma if needed) / aiReady.heroSubhead; primary CTA -> /services (label via aiReady.serviceCta or new key), secondary -> anchor to the approval section.
+
+STRUCTURE:
+1. Navbar (app Header) / Hero (ui Hero, centered text).
+2. Animation frame: max 880px, 16:9, radius-xl bordered shadow card containing HeroApprovalDemo; small centered muted caption under it (new key).
+3. Problem framing: centered 720px; mono kicker; h2 30px; large 17px muted paragraph. Keys: aiReady.problemTitle/problemBody.
+4. Checklist: centered kicker "The checklist" + h2 (aiReady.checklistTitle/checklistSubhead); 3-col FeatureCard grid (2/1 responsive) with icons; content = aiReady.item1..6.
+5. Approval showcase: max 1000px muted-bg radius-xl panel, 2-col (copy left: kicker + h2 + body via new keys incl. the softened truth claim; right: ApprovalQueueCard (WP-CLI/fittric.com demo content) -> down arrow -> "Published to production" success strip with StatusBadge approved).
+6. Service band: max 1000px gradient (accent->primary/12) radius-xl panel, 2-col (1.3fr/1fr): left kicker "One-time service" + h2 + body (aiReady.serviceTitle/serviceBody) + 4 check bullets (new keys or derive from services copy); right price card ($299 mono 40px + "one-time, per site" + primary CTA "Book AI-ready setup" -> /services + text link "Or do it yourself, free ->" -> /register).
+7. CtaBand (aiReady.ctaTitle + subhead) / Footer app's own. Keep existing JSON-LD + metadata (meta.aiReady.*).
+-->

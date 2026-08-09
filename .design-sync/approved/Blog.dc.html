@@ -1,0 +1,12 @@
+<!-- Approved design: /blog index (project e77fde1e). Layout truth only; mockup TEXT never a copy source.
+CONTENT/HONESTY CORRECTIONS:
+- ALL post titles/excerpts/authors in the mockup are INVENTED ("Mai Tran", "Duc Le", "Priya Nair" do not exist - fabricated bylines are BANNED). Render REAL BlogPost rows from Prisma exactly as the current page queries them; meta line = real date (+ read time only if derivable); NO author bylines unless the DB has a real author field with real values.
+- The mockup's "Social preview" section is a DESIGN DOC for the OG treatment, NOT a page section - do NOT port it to the page. It specifies the opengraph-image route design: blog-og-default-cover.png full-bleed, left→right light gradient overlay (rgba(248,250,253) .96→0 by ~70%), LaunchWP logo chip + brand name top of text block, post title 25px/800 dark #12151c in the left ~66%, mono "launchwp.dev/blog" line. Implement that in the dynamic OG route.
+- Cover images: check prisma BlogPost for an image/cover field; if none exists, ALL cards use the designed fallback (no schema migration in this pass - note it as follow-up). Copy blog-og-default-cover.png from marketing-assets/ into public/images/marketing/.
+
+STRUCTURE:
+1. Hero: LEFT-aligned, max 1120px: mono kicker ("The journal" - new i18n key), h1 40px max 640px, subhead max 600px (new keys; keep meta.* for metadata).
+2. Featured post (only if posts exist; use the newest real post): full-width link card aspect 2.6/1, cover image (real cover else default cover asset) with the left gradient overlay + overlaid: category/featured pill, h2 30px dark-on-light, excerpt, mono meta line. NOTE the overlay text colors are hardcoded LIGHT-surface values in the design (#12151c on light gradient) - keep that treatment in BOTH themes (the image+gradient is its own light surface).
+3. Post grid: 3-col (2/1 responsive) .lwp-card link cards, hover lift + primary border: media area aspect 3/2 = real cover if present ELSE the fallback treatment (token gradient bg variant cycling 3 gradients, dot-pattern mask, mono category word bottom-left, small L logo chip top-right); body = mono category label primary, h3 17px, excerpt muted 13.5px, mono meta line.
+4. Footer app's own. Preserve generateMetadata + any JSON-LD.
+-->

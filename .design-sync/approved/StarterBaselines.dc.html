@@ -1,0 +1,15 @@
+<!-- Approved design: /blueprints reframed as "Starter baselines" - DEMOTED page (project e77fde1e). Layout truth only; mockup TEXT never a copy source.
+CONTENT CORRECTIONS:
+- Baseline cards are INVENTED (Twenty Twenty-Five etc.). Real data = STARTER_BLUEPRINTS config (src/config/blueprints.ts): real names, real theme (Kadence block theme; premium starters BeTheme/Flatsome/JNews where configured), real curated stack chips. Render at the config's real cardinality in a 2-col grid.
+- Wizard strip: REAL wizard steps are Name -> Setup -> Review (3 steps; plan choice happens before the wizard). Use those labels with the Setup step current, NOT the design's invented 4 steps.
+- Hero copy direction is exactly the honest reframe (block theme + curated plugin stack + caching/security/backups/staging on a FRESH install; "nothing is copied from another site") - wire via blueprints.* keys where existing text already says this after the copy pass; keys whose text still says "clone" must be REWRITTEN (blueprints.heroSubhead, home-era "Clone a baseline" phrasing, industry.startersSubhead) - list every key you change EN+VI; these copy changes ride the port commit and the CMS map is NOT patched for them (blueprints.* keys are not in the 38-key override map - code defaults render directly).
+- URL stays /blueprints (SEO); page H1/title becomes "Starter baselines" family; footer/product link label likewise; NO nav item.
+- meta.blueprints.* keys also need the de-clone rewrite.
+
+STRUCTURE:
+1. Compact centered hero (680px): pill "Starter baselines"; h1 34px; honest definition subhead.
+2. Baseline grid: max 900px, 2-col cards: accent mono mark chip + name + mono theme line; "Curated stack" label + pill chips row; bottom bordered row with success check + "Caching, security, backups & staging preconfigured" (new key).
+3. "Where you choose one" panel: max 760px muted radius-xl; centered kicker + h2 "A single step in the new-site wizard"; WizardSteps (real 3 steps, current=Setup); centered muted closing line ("ready for you or your AI agent to build on" - new key).
+4. Compact CtaBand -> /register + /pricing. Footer app's own.
+This page is deliberately SMALLER than the others - keep it that way.
+-->

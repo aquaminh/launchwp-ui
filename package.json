@@ -13,7 +13,8 @@
   },
   "files": ["dist", "src/styles.css"],
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "sync-tokens": "node scripts/sync-tokens.mjs"
   },
   "peerDependencies": {
     "react": "^18 || ^19",

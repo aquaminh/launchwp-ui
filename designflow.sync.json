@@ -1,0 +1,7 @@
+{
+  "system": "launchwp",
+  "api": "https://brandpilot.dev",
+  "target": "src/styles.css",
+  "prefix": "launchwp-",
+  "map": {}
+}

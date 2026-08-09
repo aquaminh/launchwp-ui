@@ -1,0 +1,14 @@
+<!-- Approved design: /for/[industry] template (project e77fde1e). Layout truth only; mockup TEXT never a copy source.
+CONTENT SOURCE CORRECTIONS: the mockup's niche content (pains/diffs/baselines/FAQs) is INVENTED. The REAL per-niche content lives in src/config/industries.ts + industries.vi.ts (headline/subhead/painPoints/differentiators/faqs, CMS-overridable via the niche map) - render THAT at the REAL cardinality (config counts, not the design's 4/4/3/4). Baseline cards = the config's recommended blueprint slugs (config field) with honest baseline copy - never "clone" language; links go to /register or the wizard, label like "Start from this baseline". Hero images = the three approved photos, already in app repo at public/images/marketing/? NO - copy from marketing-assets/: for-agencies-hero.png, for-developers-hero.png, for-ecommerce-hero.png -> public/images/marketing/. The design's pain->diff "Answers 01" tag chips: apply 1:1 by index ONLY when config painPoints.length === differentiators.length for that niche; otherwise omit the chips.
+
+STRUCTURE (per niche page):
+1. Hero: 2-col grid (copy left, photo right in radius-xl bordered shadow card aspect 3/2, object-position 50% 35%; stacks copy-first on mobile); pill eyebrow (industry.forBadge with niche name); h1 40px = config headline; subhead = config subhead; primary CTA (industry.getStarted -> /register?niche=slug) + text link "See pricing ->" (industry.viewPricing -> /pricing).
+2. Pain points: kicker "The problem" + h2 = industry.whyGenericFails heading; 4-col grid (2/1 on smaller) of muted-bg cards: warning icon chip + mono tag number + bold title + muted body. Content = config painPoints.
+3. Differentiators: kicker + h2 (industry.whatWeBring); grid of FeatureCard with optional "Answers NN" chip above each (see corrections). Content = config differentiators.
+4. Starter baselines: kicker "Starter baselines"; h2 = industry.startersTitle; sub = honest baseline definition (industry.startersSubhead - NO clone verbs; if the existing key text contains "Clone", note it for the copy pass); 3-col cards (mono mark chip + name + body + text link). Content = config blueprint recommendations.
+5. Services section ONLY for agencies (config has serviceCards flag): kicker "Done-for-you services"; 3 cards (name + mono primary price + body + text link) from REAL SERVICE_TIERS.
+6. FAQ: centered kicker FAQ + h2 (industry.commonQuestions); FaqList; content = config faqs (real cardinality). Keep FAQPage JSON-LD.
+7. Cross-links: small muted h2 (industry.alsoExplore); 2-col link cards (name + blurb + arrow, border hover primary) to the OTHER two niches (config-driven).
+8. CtaBand (industry.ctaTitle with niche name + ctaSubhead), Footer = app's own.
+Paddings ~56-62px sections, max 1120px, FAQ 760px.
+-->

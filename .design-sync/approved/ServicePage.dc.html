@@ -1,0 +1,18 @@
+<!-- Approved design: Services + Migrate template (project e77fde1e). Layout truth only; mockup TEXT never a copy source.
+HONESTY/DATA CORRECTIONS AT PORT:
+- Tier prices/labels are INVENTED in the mockup ("up to 10 sites $699", "multi-site $499 AI setup"). Use the REAL SERVICE_TIERS from src/lib/payments/migration.ts (migration $99/$249/$499; ai-ready-setup $299; agency-onboarding $499) and existing localized tier copy.
+- The mockup's fake Turnstile chip and fake PayPal buttons are ILLUSTRATIONS - keep the app's REAL Turnstile component and REAL PayPalButtons exactly as they work today (restyle around them, never replace).
+- "A real person handles the move" framing is fine (true). WizardSteps labels + 3 after-payment cards ("We email you - within 1 business day / You send access / Cutover handled - approved by you") match the real migrate.done.body promise - wire via new i18n keys if no existing ones fit.
+- StatStrip proof row = process facts only (1 biz day first email / staging first / 14-day guarantee) - never fabricated metrics.
+- Design's service enum (migration|aisetup) = the two real pages: /migrate (migration tiers) and /services (ai-ready setup + agency onboarding tiers). Same template, different data + copy keys (migrate.* vs services.*).
+
+STRUCTURE:
+1. Hero: LEFT-aligned (not centered), max 1120px; pill badge "One-time service"; h1 38px max 720px; subhead 17px max 640px. Keys: migrate.heroTitle/heroSubhead + heroNote, services.heroTitle/heroSubhead + heroNote.
+2. Two-column section (lwp-cols 1fr/1fr gap 48, stacks on <=900 with FORM FIRST on mobile):
+   LEFT reassurance: image assets/migrate-handover.png in radius-xl bordered shadow card aspect 4/3 (object-position 50% 42%); h2 20px reassurance title; 4 assurance items (success check circle icon + bold title + muted body). New i18n keys for reassurance items (per page).
+   RIGHT form card (card bg, radius-xl, shadow-2, padding 28): heading + "Step 1 of 1" mono; hint line; tier picker = vertical radio-cards (selected: accent bg + primary border + ring, radio dot; label + note left, mono price right); URL + email fields (existing form fields restyled with .lwp-field-like styles = app Input components are fine); REAL Turnstile; REAL PayPalButtons; fine-print line (charged once - {price} for {tier} - 14-day money-back guarantee) via tf() with vars.
+3. "After payment" section: kicker "After payment", h2 "What happens next"; WizardSteps (3 labels, current 0) centered max 640; then 3-col card grid (number chip + title + body + mono primary meta line).
+4. Honest-proof StatStrip in a bordered card row.
+5. CtaBand: "Questions before you pay?" register-free-contact framing - wire to existing/new keys, secondary -> /pricing.
+6. Footer: app's own.
+-->

@@ -1,0 +1,20 @@
+<!-- Approved design: /billing (project b32dffdb). Layout truth only; mockup TEXT/DATA never a source.
+DATA/HONESTY CORRECTIONS AT PORT (the mockup assumed Stripe + card-on-file - BOTH WRONG):
+- Payment method: LaunchWP bills via PAYPAL SUBSCRIPTIONS. No card, no "Visa 4242", no expiry, no "Update payment method" flow. The payment-method card shows the PayPal subscription (id, status) exactly as the current billing page knows it; link/manage actions = whatever exists today (no invented card-update dialog).
+- "Reconciled from Stripe webhook events" -> "Reconciled from PayPal webhook events"; row meta = REAL WebhookLog event types (e.g. PAYMENT.SALE.COMPLETED) + real ids as the current page mines them. NO fake evt_ Stripe ids.
+- "Retry payment" button + fake retry spinner: NOT a real capability - DROP entirely. Keep whatever past-due/grace surface the current page has.
+- Plan change: wire the design's plan-picker (PlanCard row + confirm dialog) to the EXISTING change-plan handlers/routes and proration rules (upgrades prorated now; downgrades at next renewal - reuse the app's real copy). Current plan card highlight label "Current plan"; CTA labels Upgrade/Switch per rank vs current.
+- Cancel subscription: wire to the EXISTING cancel flow; dialog copy must state the REAL cancel-entitlement behavior (subscription cancels now, sites stay active until the period end date) - reuse existing strings, never "read-only".
+- All dates/amounts/counts = real subscription + plan + payment data the current billing page already loads. StatStrip: Current plan / Next billing (real date+amount; omit if cancelled - show status instead) / Sites n of limit / Payment method "PayPal".
+- Dashboard is ENGLISH-ONLY.
+
+STRUCTURE (inside existing DashboardSidebar shell - restyle content only):
+1. Header: h1 22px "Billing" + sub "Manage your plan, payment method, and invoices."; right ThemeToggle.
+2. StatStrip in bordered card (4 real KPIs, see corrections).
+3. Two-column grid 1.5fr/1fr (stacks mobile):
+   LEFT "Current plan" card: uppercase label, plan name 22px + mono price/mo, primary "Change plan"/"Hide plans" toggle button; check-row of real plan features (wrap); footer row (border-t): renewal line ("Renews <real date> - next charge $X") + quiet "Cancel subscription" text button.
+   RIGHT "Payment method" card: PayPal method display (see corrections).
+4. Collapsible "Change plan" section (when open): heading + proration note + Close; flex row of ALL 4 real plans as PlanCard (highlight = current, "Current plan" label; click -> confirm dialog -> existing change-plan flow).
+5. "Payment history": heading + "Reconciled from PayPal webhook events" sub; right segmented filter (All/Paid/Failed - client-side); bordered table (Date mono / Description + mono event-meta line / Amount right mono (credits success-colored) / Status pill (Paid success, Failed destructive, Credit muted) / Receipt link only where a real receipt URL exists - OMIT the column if none does). Empty-state row per filter.
+6. Confirm dialog (shared): fixed overlay + 440px card, title/body/cancel/confirm (danger = destructive bg); click-outside closes; wire to real actions only.
+-->
