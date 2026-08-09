@@ -14,8 +14,9 @@
  *     "api": "https://brandpilot.dev",
  *     "target": "src/styles.css",
  *     "prefix": "zb-",                  // package var = --<prefix><api var name>
- *     "map": {}                         // optional overrides: apiName -> packageVarName
- *   }
+ *     "map": {},                        // optional overrides: apiName -> packageVarName
+ *     "ignore": []                      // optional "mode:apiName" entries excluded from
+ *   }                                   // comparison (documented, deliberate divergences)
  *
  * Only variables the API serves are compared/updated; package-only vars
  * (extra shades, component vars) are never touched. Colors are compared
@@ -110,11 +111,17 @@ const pkgCss = readFileSync(targetPath, 'utf8');
 const api = parseVars(apiCss);
 const pkg = parseVars(pkgCss);
 
+const ignore = new Set(cfg.ignore ?? []);
 const drift = [];
 const apiOnly = [];
 let inSync = 0;
+let ignored = 0;
 for (const mode of ['light', 'dark']) {
   for (const [name, apiValue] of Object.entries(api[mode])) {
+    if (ignore.has(`${mode}:${name}`)) {
+      ignored += 1;
+      continue;
+    }
     const pkgName = cfg.map?.[name] ?? `${cfg.prefix}${name}`;
     const pkgValue = pkg[mode][pkgName];
     if (pkgValue === undefined) {
@@ -142,7 +149,7 @@ if (apiVarCount > 0 && inSync === 0 && drift.length === 0) {
 
 console.log(`system=${cfg.system}  source=${url}`);
 if (systemUpdatedAt) console.log(`system updatedAt: ${systemUpdatedAt}`);
-console.log(`in sync: ${inSync}   drifted: ${drift.length}   served-but-absent-in-package: ${apiOnly.length}`);
+console.log(`in sync: ${inSync}   drifted: ${drift.length}   ignored: ${ignored}   served-but-absent-in-package: ${apiOnly.length}`);
 for (const d of drift) {
   console.log(`  DRIFT [${d.mode}] --${d.pkgName}: package="${d.pkgValue}"  api="${d.apiValue}"`);
 }
