@@ -21,10 +21,12 @@
  * Only variables the API serves are compared/updated; package-only vars
  * (extra shades, component vars) are never touched. Colors are compared
  * normalized (hsl triplet vs hex), and written back in the package's
- * existing format. Node 18+ (built-in fetch), no dependencies.
+ * existing format. Needs the owner token (see ownerToken below).
+ * Node 18+ (built-in fetch), no dependencies.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { homedir } from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
@@ -97,10 +99,40 @@ function normalize(value) {
   return hslTripletToHex(s) ?? s.toLowerCase();
 }
 
+// Owner-fleet bearer: the owner's syncs must not count as external adoption
+// (public useCount) and must still reach systems curated private. Token from
+// env ADOPTION_OWNER_TOKEN, else ~/.claude/credentials/designflow-adoption.json
+// field "token"; never printed, never written into designflow.sync.json. The
+// server marks an honoured bearer with x-brandpilot-owner-fleet: 1 - without
+// it this exits instead of syncing as an anonymous caller. Same contract as
+// app-dev lib/designflow-owner-fetch.mjs, inlined so the package has no deps.
+function ownerToken() {
+  const fromEnv = process.env.ADOPTION_OWNER_TOKEN?.trim();
+  if (fromEnv) return fromEnv;
+  try {
+    const { token } = JSON.parse(readFileSync(path.join(homedir(), '.claude/credentials/designflow-adoption.json'), 'utf8'));
+    if (typeof token === 'string' && token.trim()) return token.trim();
+  } catch {
+    // missing or unreadable file: reported by the caller
+  }
+  return null;
+}
+
+const token = ownerToken();
+if (!token) {
+  console.error('FAIL: no DesignFlow owner token - set ADOPTION_OWNER_TOKEN or add "token" to ~/.claude/credentials/designflow-adoption.json');
+  process.exit(2);
+}
+
 const url = `${cfg.api}/api/systems/export/${cfg.system}?format=globals-css`;
-const res = await fetch(url, { redirect: 'follow' });
+const res = await fetch(url, { redirect: 'follow', headers: { Authorization: `Bearer ${token}` } });
 if (!res.ok) {
   console.error(`FAIL: HTTP ${res.status} from ${url}`);
+  if (res.status === 404) console.error('A private system answers 404 when the owner token is not honoured - check the token before the system name.');
+  process.exit(2);
+}
+if (res.headers.get('x-brandpilot-owner-fleet') !== '1') {
+  console.error(`FAIL: ${url} answered without x-brandpilot-owner-fleet: 1 - the owner token was not honoured (wrong or retired token, or the server has no ADOPTION_OWNER_TOKEN)`);
   process.exit(2);
 }
 const apiCss = await res.text();
