@@ -32,3 +32,11 @@ If a future re-sync hits `[RENDER_SKIPPED] ... Executable doesn't exist ...` aga
 ## Approved designs (Stage 3 output)
 
 Owner's design project: **LaunchWP FrontPage Redesign** `e77fde1e-6be7-44cf-970a-d0786ab9a302` (type PROJECT, readable via DesignSync get_file - no extra MCP needed despite the templated import prompt). Files: 10 page designs (`Homepage.dc.html`, `Pricing.dc.html`, `Features.dc.html`, `ComparisonPage.dc.html`, `NichePage.dc.html`, `ServicePage.dc.html`, `AiReady.dc.html`, `Blog.dc.html`, `StarterBaselines.dc.html`, `HeroApprovalLoop.dc.html`) + `hero-approval-loop.jsx`, `animations-v2.jsx`, the design system snapshot under `_ds/`, and `assets/` mirror. Port-back reads each .dc.html: `<x-dc>` markup = layout truth; `renderVals()` in the trailing script = the design's data shape; mockup TEXT is never a copy source (Stage 4 rules). Known mockup honesty bugs to correct at port: "approval queue and MCP Adapter start on Pro" (false - every plan), invented nav links (Regions/Docs), 5-pill niche row (only 3 niches exist).
+
+## Claude Design archive (exported 2026-10-23)
+
+Standalone claude.ai/design closes 2026-12-14 and its projects do not migrate, so both LaunchWP projects were exported and kept locally under `.design-sync/archive/` (gitignored; local only, not in git or on the other machine):
+- `LaunchWP FrontPage Redesign.zip` - 29 files, 14.8 MB, sha256 `35bcb506...b8415e`. The approved page designs above live here after 2026-12-14; DesignSync `get_file` stops working then.
+- `LaunchWP Dashboard UI.zip` - 12 files, 81 KB, sha256 `db663784...df97a03`.
+
+The design system itself now lives in the LaunchWP Design System artifact (`artifactUrl` in `config.json`), re-synced from this package's code.
