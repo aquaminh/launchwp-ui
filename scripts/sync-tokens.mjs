@@ -124,7 +124,7 @@ if (!token) {
   process.exit(2);
 }
 
-const url = `${cfg.api}/api/systems/export/${cfg.system}?format=globals-css`;
+const url = `${cfg.api}/api/v2/systems/${cfg.system}/export?format=globals-css`;
 const res = await fetch(url, { redirect: 'follow', headers: { Authorization: `Bearer ${token}` } });
 if (!res.ok) {
   console.error(`FAIL: HTTP ${res.status} from ${url}`);
